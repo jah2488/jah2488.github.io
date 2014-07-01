@@ -1,6 +1,3 @@
-###
-# Compass
-###
 
 # Change Compass configuration
 # compass_config do |config|
@@ -23,24 +20,7 @@
 # with_layout :admin do
 #   page "/admin/*"
 # end
-
-# Proxy pages (http://middlemanapp.com/basics/dynamic-pages/)
-# proxy "/this-page-has-no-template.html", "/template-file.html", :locals => {
-#  :which_fake_page => "Rendering a fake page with a local variable" }
-
-###
-# Helpers
-###
-
-# Automatic image dimensions on image_tag helper
-# activate :automatic_image_sizes
-
-# Reload the browser automatically whenever files change
-configure :development do
- activate :livereload
- activate :blog
-end
-
+#
 # Methods defined in the helpers block are available in templates
 # helpers do
 #   def some_helper
@@ -49,21 +29,29 @@ end
 # end
 
 set :css_dir, 'css'
-
 set :js_dir, 'js'
-
 set :images_dir, 'img'
+set :markdown_engine, :kramdown
+
+activate :syntax, line_numbers: true
+activate :relative_assets
+
+activate :blog do |b|
+  b.prefix = 'blog'
+end
+
+page "/blog/*", layout: 'article_layout'
 
 # Build-specific configuration
+configure :development do
+  activate :livereload
+end
+
 configure :build do
-  # For example, change the Compass output style for deployment
   # activate :minify_css
-  # Minify Javascript on build
   # activate :minify_javascript
-  activate :relative_assets
   set :relative_links, true
 
-  activate :blog
   activate :directory_indexes
   # Enable cache buster
   # activate :asset_hash
