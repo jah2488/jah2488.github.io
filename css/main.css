@@ -112,8 +112,9 @@ textarea {
     font-style: normal;
 }
 
-h1, h2, h3, h4 { font-family: "Brandon Grotesque", "Futura", Helvetica, Arial, sans-serif; }
-    
+/*h1, h2, h3, h4 { font-family: "Brandon Grotesque", "Futura", Helvetica, Arial, sans-serif; }*/
+h1, h2, h3, h4 { font-family: "Montserrat", "Futura", Helvetica, Arial, sans-serif; }
+
 a, a:visited {
   color: white;
   text-decoration:none;
@@ -145,6 +146,10 @@ header h1 {
     font-size: 3.4em;
     margin: .3em 0 0 1em;
     text-align: right;
+}
+
+header h1 a {
+  font-size:3.4rem;
 }
 
 header h1 strong { color:white; font-weight:900; }
@@ -234,11 +239,22 @@ article h1 {
     margin: 0;
     padding: .2em 0 0 0;
     font-size: 2.4em;
+    margin-bottom: 20px;
 }
 
 article header {
     background-color: white;
     padding-top: 1.3em;
+}
+
+article a:visited,
+article a:active,
+article a {
+  color: #196375;
+}
+article a:hover {
+  color: #196375;
+  border-bottom: 2px solid #196375;
 }
 
 article p {

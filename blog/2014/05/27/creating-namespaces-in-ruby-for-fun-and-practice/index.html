@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Creating namespaces in ruby for fun and practice</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,800,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Sofia' rel='stylesheet' type='text/css'>
+        <link href="../../../../../css/normalize.css" rel="stylesheet" type="text/css" />
+        <link href="../../../../../css/base.css" rel="stylesheet" type="text/css" />
+        <link href="../../../../../css/skeleton.css" rel="stylesheet" type="text/css" />
+        <link href="../../../../../css/main.css" rel="stylesheet" type="text/css" />
+        <link href="../../../../../css/github.css" rel="stylesheet" type="text/css" />
+        <script src="../../../../../js/vendor/modernizr-2.6.1.min.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]> <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p> <![endif]-->
+        <header>
+          <div id='header-wrap' class='container'>
+            <div class='seven columns'>
+              <nav>
+                <ul>
+                  <li><a href='#about'>about</a></li>
+                  <li><a href='/'>posts</a></li>
+                  <li><a href='#games'>games</a></li>
+                  <li><a href='#talks'>talks</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class='nine columns'>
+              <h1> <a href='/'> JUSTIN HERRICK </a> </h1>
+              <h2>Software Craftsperson, Game Designer, and Educator</h2>
+            </div>
+          </div>
+        </header>
+
+        <div id='wrapper' class='wrapper container'>
+            <article>
+    <h1>Creating Namespaces In Ruby For Fun And Practice</h1>
+    <date>May 27, 2014</date>
+    <hr>
+    <p>A recurring practice of mine these days is to take a feature of a language and see if I can replicate its functionality or likeness in Ruby. Sometimes this is because the feature is one I wish Ruby supported, but in most cases its simply a fun exercise to see if Ruby is capable of doing such a thing and seeing what the design implications would have on my Ruby code.</p>
+
+<p>Lately I’ve been switching frequently between Clojure and Ruby. This has me curious about how close I can get Ruby to look like Clojure in size and style. Recently, what has bothered me most has been how you define a namespace in Ruby by nested modules. Compared to other languages like Clojure, Java, or Haxe, Ruby can seem rather verubyose. For example, here’s Clojure:</p>
+
+<div class="highlight clojure"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre></td><td class="code"><pre><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="no">:github.users.repositories.utilities.greeter</span><span class="p">)</span><span class="w">
+
+</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">greet</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="s">"hello"</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table>
+</div>
+
+<p>This is much more terse than Ruby’s deeply nested namespaces: </p>
+
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre><pre class="lineno">6</pre><pre class="lineno">7</pre><pre class="lineno">8</pre><pre class="lineno">9</pre><pre class="lineno">10</pre><pre class="lineno">11</pre><pre class="lineno">12</pre><pre class="lineno">13</pre></td><td class="code"><pre><span class="k">module</span> <span class="nn">Github</span>
+  <span class="k">module</span> <span class="nn">Users</span>
+    <span class="k">module</span> <span class="nn">Repositories</span>
+      <span class="k">module</span> <span class="nn">Utilities</span>
+        <span class="k">module</span> <span class="nn">Greeter</span>
+          <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">greet</span>
+            <span class="s1">'hello'</span>
+          <span class="k">end</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Even Ruby’s inline syntax, <a href="http://blog.elpassion.com/Ruby-gotchas/">which you may not want to use</a>, seems comparatively clunky:</p>
+
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre></td><td class="code"><pre><span class="k">module</span> <span class="nn">Github::Users::Repositories::Utilities::Greeter</span>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">greet</span>
+    <span class="s1">'hello'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Lets fix that. What I want is a syntax that lets me state clearly the namespacing in which my code should be found, without needing all that nesting. After a little bit of trial and error, I came up with this syntax. <a href="https://gist.github.com/jah2488/8938747">The original gist of this can be found here.</a></p>
+
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre></td><td class="code"><pre><span class="n">ns</span> <span class="s1">'github.users.repositories.utilities.greeter'</span> <span class="k">do</span>
+  <span class="k">def</span> <span class="nf">greet</span>
+    <span class="s1">'hello'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Simple, short, and clean. Now lets walk through the code that does the magic.</p>
+
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">ns</span><span class="p">(</span><span class="n">namespace</span><span class="p">,</span> <span class="n">delim</span> <span class="o">=</span> <span class="s1">'.'</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
+  <span class="n">nest_mod</span><span class="p">(</span><span class="n">namespace</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="n">delim</span><span class="p">),</span> <span class="n">block</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>The ns method ends up being a wrapper of the method that does all the work and a bridge to the DSL we are providing.</p>
+
+<p>I have an optional parameter specifying what the delimiter is for the namespace. This both provides flexibility in the input we accept and abstracts away having a magic string in the method body. </p>
+
+<p>I am taking Ruby’s implicit block and converting to a proc argument for our method. The reasoning behind this is syntax. If the proc were a normal argument, it would make the method call awkward.</p>
+
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre><pre class="lineno">6</pre></td><td class="code"><pre><span class="n">ns</span><span class="p">(</span><span class="s1">'greeter'</span><span class="p">,</span> <span class="no">Proc</span><span class="p">.</span><span class="nf">new</span> <span class="p">{</span>
+  <span class="k">def</span> <span class="nf">greet</span>
+    <span class="s1">'hi'</span>
+  <span class="k">end</span>
+<span class="p">})</span> <span class="c1">#ew</span>
+
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Now for the method that does all the work.</p>
+
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre><pre class="lineno">6</pre><pre class="lineno">7</pre><pre class="lineno">8</pre><pre class="lineno">9</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">nest_mod</span><span class="p">(</span><span class="n">mod</span> <span class="o">=</span> <span class="no">Kernel</span><span class="p">,</span> <span class="n">mod_names</span><span class="p">,</span> <span class="n">block</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">mod</span><span class="p">.</span><span class="nf">module_exec</span><span class="p">(</span><span class="o">&amp;</span><span class="n">block</span><span class="p">)</span> <span class="k">if</span> <span class="n">mod_names</span><span class="p">.</span><span class="nf">empty?</span>
+  <span class="n">find_or_create_const</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">to_const</span><span class="p">(</span><span class="n">mod_names</span><span class="p">.</span><span class="nf">first</span><span class="p">)).</span><span class="nf">tap</span> <span class="k">do</span> <span class="o">|</span><span class="n">this</span><span class="o">|</span>
+    <span class="n">make_module_methods_accessible</span><span class="p">(</span><span class="n">this</span><span class="p">)</span>
+    <span class="n">this</span><span class="p">.</span><span class="nf">module_exec</span> <span class="k">do</span>
+      <span class="n">nest_mod</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">mod_names</span><span class="p">.</span><span class="nf">drop</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">block</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>It's dense, but readable. If it is not immediately obvious, this is a recursive method that will call itself for every namespace in the list.</p>
+
+<p>The method begins with the end, the leaf node, the base case, what have you. If there are no more ~module_names~ left, it evaluates the block of code provided in the context of the current module. If there are more ~module_names~, it continues creating nested modules.</p>
+
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">find_or_create_const</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">str</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">mod</span><span class="p">.</span><span class="nf">const_get</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="k">if</span> <span class="n">mod</span><span class="p">.</span><span class="nf">const_defined?</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">mod</span><span class="p">.</span><span class="nf">const_set</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="no">Module</span><span class="p">.</span><span class="nf">new</span><span class="p">)</span>
+<span class="k">end</span>
+
+</pre></td></tr></tbody></table>
+</div>
+
+<p>The helper method <code>find_or_create_const</code> that takes the current module and a ‘constantized’ string version of the first <code>module_name</code>. It returns that constant if it has been already defined within the current module scope. Otherwise, it creates a new empty module with the given name.</p>
+
+<p>A <a href="http://www.seejohncode.com/2012/01/02/Ruby-tap-that/">tap</a> block allows us to work with the constant returned from <code>find_or_create_constant_in_module</code> without the need for an intermediate variable. This is one of the few times when I feel the call to tap provides more intent and adds more clarity to the ‘<a href="https://practicingRuby.com/articles/confident-Ruby">story the method is telling</a>’.</p>
+
+<p>Moving into the block:</p>
+
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">make_module_methods_accessible</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
+  <span class="n">mod</span><span class="p">.</span><span class="nf">module_exec</span> <span class="p">{</span> <span class="kp">extend</span> <span class="nb">self</span> <span class="p">}</span>
+<span class="k">end</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>This name of this method is longer than all the code within it. I’m sure there is a better name out there, but I'm also certain it'll be the same length. The current name explains what it is doing, but not how it's doing it or what doing that means. The module ~extend self~ call is a way to turn every instance method in a module into a singleton method. This eliminates the need to repeat the ~def self.foo~ pattern in every method.</p>
+
+<p>Ending the method is a call to <code>module_exec</code> in the context of the new module and then a recursive call to itself after dropping the first name from the <code>module_names</code> list.</p>
+
+<p>The one limitation I ran into with this was that you cannot nest any constants inside your namespace unless you call <code>const_set</code>. Due to the way <a href="https://twitter.com/jm/status/432721441599942656">Ruby parses</a> blocks and evaluates constants they will always end up at the <a href="https://gist.github.com/jah2488/8890318">top level namespace</a>. I've packed the finished code into a <a href="https://github.com/jah2488/namespacing">gem</a> if anyone is interested in trying it out.</p>
+
+<p>I was happy to find a syntax that both cleans up the Ruby nested module boilerplate while still feeling like Ruby code in the end. A great approach for learning ways to tackle new or existing problems is to adopt the perspective of a different language or paradigm.</p>
+
+  </article>
+
+        </div>
+
+        <footer>
+        </footer>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.1.3/zepto.min.js"></script>
+        <script src="../../../../../js/plugins.js" type="text/javascript"></script>
+        <script src="../../../../../js/main.js" type="text/javascript"></script>
+    </body>
+</html>
