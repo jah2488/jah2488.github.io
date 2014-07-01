@@ -93,66 +93,121 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+@font-face {
+    font-family: 'goudy_bookletter_1911regular';
+    src: url('goudy_bookletter_1911-webfont.eot');
+    src: url('goudy_bookletter_1911-webfont.eot?#iefix') format('embedded-opentype'),
+         url('goudy_bookletter_1911-webfont.woff') format('woff'),
+         url('goudy_bookletter_1911-webfont.ttf') format('truetype'),
+         url('goudy_bookletter_1911-webfont.svg#goudy_bookletter_1911regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Brandon Grotesque';
+    src: url('Brandon_blk.otf') format('otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1, h2, h3, h4 { font-family: "Brandon Grotesque", "Futura", Helvetica, Arial, sans-serif; }
+    
 a, a:visited {
-  color: #EF6960;
+  color: white;
   text-decoration:none;
   font-size: 1.3em;
 }
 
-a:hover {
+nav a {
+    font-family: "Brandon Grotesque", "Futura", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+}
+
+nav a:hover {
   border-bottom: 1px solid;
 }
 
 /* header */
 header {
   color: #CACACA;
-  background-color: #435C6F;
+  background-color: #196375; 
+/*    background-color: #da7c6f; */
   top:0;
   width:100%;
   margin-bottom:20px;
 }
 
 header h1 {
-  display:inline-block;
+    color: white;
+    font-weight: bolder;
+    font-size: 3.4em;
+    margin: .3em 0 0 1em;
+    text-align: right;
 }
 
-nav {
-  float: right;
-  margin: 0.67em 0;
+header h1 strong { color:white; font-weight:900; }
+
+header h2 {
+    font-family: "Sofia", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: white;
+    font-style: italic;
+    text-align: right;
+    font-size: 1.3em;
 }
+
+nav ul {
+    margin: 0;
+    padding: 4em 0 0 0;
+    text-align: justify;
+    display: table;
+    width: 100%;
+}
+
 nav ul li {
-  font-size: 1.3em;
-  font-variant:small-caps;
-  float: left;
-  margin-right: 5px;
+  font-size: 1.2em;
+  margin: 0 auto;
+    text-align: left;
+  line-height: 40px;
+    display: table-cell;
 }
 
 nav ul li:not(:last-child):after {
-  color: #EF6960;
+  color: #0f0a06;
   content: '';
-  margin-left: 9px;
 }
-
 
 /*  BLOG | POSTS | INDEX */
 
 .posts-list {
-  margin-top:1.5rem;
+  margin-top: 4.5rem;
+}
+
+.posts-list h4 {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.2em;
 }
 
 .posts-list li {
   margin: 0;
-  padding: 10px;
+  padding: 0
+}
+.posts-list li a {
+    width: 200%;
+    height: 100%;
+    margin: 0;
+    padding: 10px;
+    color: #0f0a06;
 }
 .posts-list li h4 {
   margin: 0;
 }
 
 .posts-list li:nth-child(even) {
-  background: #DEDEDE;
+  background: #fefdfc;
 }
 .posts-list li:hover, .posts-list li:nth-child(even):hover {
-  background: #CACACA;
+  background: #f9f8f8;
 }
 
 .posts-list time {
@@ -162,7 +217,43 @@ nav ul li:not(:last-child):after {
   content: attr(time);
 }
 
+/*-- Article --*/
 
+article {
+    margin: 0 auto;
+}
+
+article h1 {
+    background-color: white;
+    color: #0f0a06;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    text-align: left;
+    margin: 0;
+    padding: .2em 0 0 0;
+    font-size: 2.4em;
+}
+
+article header {
+    background-color: white;
+    padding-top: 1.3em;
+}
+
+article p {
+    font-family: "goudy_bookletter_1911regular", "Times New Roman", Times New Roman, serif;
+    font-size: 1.3em;
+}
+
+article footer {
+    font-family: "Brandon Grotesque", "Futura", Helvetica, Arial, sans-serif;
+    font-size: 1em;
+    margin: 1.4em 0;
+    color: #196375;
+    font-variant: small-caps;
+}
+
+/*-- End Article --*/
 
 
 
@@ -277,14 +368,25 @@ nav ul li:not(:last-child):after {
     /* Style adjustments for viewports that meet the condition */
 }
 
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-       only screen and (min-resolution: 144dpi) {
-  .posts-list h4 {
-    font-size: 0.6rem;
-  }
-  .posts-list time:after {
-    content: attr(mobile);
-  }
+@media only screen and (max-width: 960px) {
+    nav ul {
+    padding: 7em 0 0 0;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    header h1{
+        text-align: center;
+        width:100%;
+        margin:10px auto;
+    }
+    header h2{
+        text-align: center;
+    }
+    nav ul{
+        text-align: center;
+        padding: 0;
+    }
 }
 
 /* ==========================================================================
