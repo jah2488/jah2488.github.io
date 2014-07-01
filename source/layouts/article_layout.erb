@@ -1,0 +1,8 @@
+<% wrap_layout :layout do %>
+  <article>
+    <h1><%= current_article.title.titleize %></h1>
+    <date><%= current_article.date.strftime("%b %e, %Y") %></date>
+    <hr>
+    <%= yield %>
+  </article>
+<% end %>
