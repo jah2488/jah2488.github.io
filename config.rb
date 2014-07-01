@@ -60,6 +60,9 @@ configure :build do
   # activate :minify_css
   # Minify Javascript on build
   # activate :minify_javascript
+  activate :relative_assets
+  set :relative_links, true
+
   activate :blog
   activate :directory_indexes
   # Enable cache buster
