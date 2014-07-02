@@ -191,17 +191,18 @@ nav ul li:not(:last-child):after {
 .posts-list h4 {
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1.2em;
+    font-weight:500;
 }
 
 .posts-list li {
   margin: 0;
-  padding: 0
+  padding-top: 12px;
+  border-bottom: 1px dashed #c3c3c3;
 }
 .posts-list li a {
     width: 200%;
     height: 100%;
     margin: 0;
-    padding: 10px;
     color: #0f0a06;
 }
 .posts-list li h4 {
@@ -220,6 +221,7 @@ nav ul li:not(:last-child):after {
 }
 .posts-list time:after {
   content: attr(time);
+  font-weight: 200;
 }
 
 /*-- Article --*/
@@ -398,10 +400,19 @@ article footer {
     }
     header h2{
         text-align: center;
+        font-size:0.84em;
+        line-height: 1;
     }
     nav ul{
         text-align: center;
         padding: 0;
+    }
+    .posts-list h4 {
+      font-size: 0.9em;
+      overflow:hidden;
+    }
+    .posts-list time:after {
+      content: attr(mobile);
     }
 }
 
