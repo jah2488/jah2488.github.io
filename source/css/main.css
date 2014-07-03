@@ -196,14 +196,17 @@ nav ul li:not(:last-child):after {
 
 .posts-list li {
   margin: 0;
-  padding-top: 12px;
+  padding-top: 1em;
   border-bottom: 1px dashed #c3c3c3;
 }
 .posts-list li a {
-    width: 200%;
-    height: 100%;
-    margin: 0;
-    color: #0f0a06;
+  width: 200%;
+  height: 100%;
+  margin: 0;
+  color: #0f0a06;
+}
+.posts-list li a:hover {
+   color: #196375;
 }
 .posts-list li h4 {
   margin: 0;
@@ -240,7 +243,13 @@ article h1 {
     margin: 0;
     padding: .2em 0 0 0;
     font-size: 2.4em;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+article hr {
+  border: 0;
+  border-bottom: 2px dashed #c3c3c3;
+  margin-top: 1px;
 }
 
 article header {
@@ -252,10 +261,11 @@ article a:visited,
 article a:active,
 article a {
   color: #196375;
+  font-size:1.3rem;
 }
 article a:hover {
   color: #196375;
-  border-bottom: 2px solid #196375;
+  border-bottom: 1px solid #196375;
 }
 
 article p {
@@ -269,6 +279,23 @@ article footer {
     margin: 1.4em 0;
     color: #196375;
     font-variant: small-caps;
+}
+
+article footer hr {
+    padding: 0;
+    border: none;
+    border-top: 2px dashed #c3c3c3;
+    color: #c3c3c3;
+    text-align: center;
+}
+article footer hr:after {
+    content: "▦";
+    display: inline-block;
+    position: relative;
+    top: -0.78em;
+    font-size: 2.5em;
+    padding: 0 0.25em;
+    background: white;
 }
 
 /*-- End Article --*/
