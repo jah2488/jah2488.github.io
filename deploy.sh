@@ -3,7 +3,7 @@ git merge dev                         &&
 middleman build --verbose             &&
 rm -rf css js 404 LICENSE README blog &&
 cd build                              &&
-mv * .[^.]* ..                        &&
+mv * .[^.]* ..                        ; # Don't care if this line fails (it will)
 cd ..                                 &&
 git add --all                         &&
 git commit -m "Release"               &&
