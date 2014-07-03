@@ -1,4 +1,4 @@
-.hll, .highlight { background-color: #3d3d3d; margin-bottom: 15px; }
+.hll, .highlight { background-color: #3d3d3d; margin-bottom: 15px; overflow-x:auto; }
 .c { color: #999988; font-style: italic } /* Comment */
 .err { color: #a61717; background-color: #e3d2d2 } /* Error */
 .k { color: #cc99cc; font-weight: bold } /* Keyword */

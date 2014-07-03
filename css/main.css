@@ -424,16 +424,26 @@ article footer hr:after {
     header h1{
         text-align: center;
         width:100%;
-        margin:10px auto;
+        margin:1px auto;
+        font-size:2em;
+    }
+    header h1 a {
+      font-size:1em;
     }
     header h2{
         text-align: center;
         font-size:0.84em;
         line-height: 1;
     }
+    header a {
+      font-size: 1em;
+    }
     nav ul{
         text-align: center;
         padding: 0;
+    }
+    nav ul li {
+      text-align:center;
     }
     .posts-list h4 {
       font-size: 0.9em;
