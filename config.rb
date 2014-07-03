@@ -37,7 +37,18 @@ activate :syntax, line_numbers: true
 activate :relative_assets
 
 activate :blog do |b|
+  b.name = 'posts'
   b.prefix = 'blog'
+end
+
+activate :blog do |b|
+  b.name = 'games'
+  b.prefix = 'game'
+end
+
+activate :blog do |b|
+  b.name = 'talks'
+  b.prefix = 'talk'
 end
 
 page "/blog/*", layout: 'article_layout'
@@ -50,6 +61,8 @@ end
 configure :build do
   # activate :minify_css
   # activate :minify_javascript
+  # activate :minify_html
+  # activate :imageoptim
   set :relative_links, true
 
   activate :directory_indexes
