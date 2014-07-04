@@ -39,19 +39,24 @@ activate :relative_assets
 activate :blog do |b|
   b.name = 'posts'
   b.prefix = 'blog'
+  b.permalink = '{title}.html'
 end
 
 activate :blog do |b|
   b.name = 'games'
   b.prefix = 'game'
+  b.permalink = '{title}.html'
 end
 
 activate :blog do |b|
   b.name = 'talks'
   b.prefix = 'talk'
+  b.permalink = '{title}.html'
 end
 
-page "/blog/*", layout: 'article_layout'
+page "/blog/*", layout: :article_layout
+page "/game/*", layout: :game_layout
+page "/game/index.html", layout: :layout
 
 # Build-specific configuration
 configure :development do
