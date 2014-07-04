@@ -200,15 +200,18 @@ nav ul li:not(:last-child):after {
   padding-top: 1em;
   border-bottom: 1px dashed #c3c3c3;
 }
+
 .posts-list li a {
   width: 200%;
   height: 100%;
   margin: 0;
   color: #0f0a06;
 }
+
 .posts-list li a:hover {
    color: #196375;
 }
+
 .posts-list li h4 {
   margin: 0;
 }
@@ -216,6 +219,7 @@ nav ul li:not(:last-child):after {
 .posts-list li:nth-child(even) {
   background: #fefdfc;
 }
+
 .posts-list li:hover, .posts-list li:nth-child(even):hover {
   background: #f9f8f8;
 }
@@ -223,6 +227,7 @@ nav ul li:not(:last-child):after {
 .posts-list time {
   float:right;
 }
+
 .posts-list time:after {
   content: attr(time);
   font-weight: 200;
@@ -302,6 +307,25 @@ article footer hr:after {
 /*-- End Article --*/
 
 
+/*-- Games --*/
+    #game-wrapper {
+      background: #333;
+      width: 640px;
+      height:480px;
+      margin: 5px auto;
+      border: 2px solid #555;
+    }
+    .play {
+      width: 0px;
+      height: 0px;
+      border-style: solid;
+      border-width: 60px 0 60px 103.9px;
+      border-color: transparent transparent transparent #54809e;
+      position: relative;
+      left:275px;
+      top: 180px;
+    }
+/*-- Games --*/
 
 /* ==========================================================================
    Helper classes
