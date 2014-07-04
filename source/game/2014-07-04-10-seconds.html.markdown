@@ -1,0 +1,10 @@
+---
+title: 10 Seconds
+name: NoTime
+date: 2014-07-04 20:23 UTC
+tags:
+plugin: unity
+---
+
+
+A 1st person exploration game built in a weekend for Ludum Dare. My first real attempt at Unity and my first 'survival horror' themed game. I underestimated how much time would be devoted to modeling all of the assets in the game and had to quickly piece together some vague narrative and goals at the very end.
