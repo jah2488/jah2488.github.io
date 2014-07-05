@@ -475,6 +475,11 @@ article footer hr:after {
     .posts-list time:after {
       content: attr(mobile);
     }
+
+    #game-content {
+      display:none;
+    }
+
 }
 
 /* ==========================================================================
