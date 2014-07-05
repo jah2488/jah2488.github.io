@@ -5,7 +5,9 @@
       <date><%= current_article.date.strftime("%b %e, %Y") %></date>
       <hr>
     </header>
-    <%= partial "game/#{current_article.metadata[:page]['plugin']}", locals: { title: current_article.metadata[:page]['name'] || current_article.title, width: current_article.metadata[:page]['width'], height: current_article.metadata[:page]['height'] } %>
+    <div id='game-content'>
+      <%= partial "game/#{current_article.metadata[:page]['plugin']}", locals: { title: current_article.metadata[:page]['name'] || current_article.title, width: current_article.metadata[:page]['width'], height: current_article.metadata[:page]['height'] } %>
+    </div>
     <%= yield %>
     <p>
       <a href="https://dl.dropboxusercontent.com/u/3496603/<%= current_article.title %>/<%= current_article.title %>.swf" target="_blank" >SWF Download</a> |
