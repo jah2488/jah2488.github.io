@@ -82,6 +82,7 @@ pre {
   line-height: 23px;
   white-space: pre;
   overflow-x: auto;
+  overflow-y: hidden;
   word-break: inherit;
   word-wrap: inherit;
   font-family: "Courier New", "Courier", monospace;
