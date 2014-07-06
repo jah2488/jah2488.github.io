@@ -21,12 +21,11 @@
 #   page "/admin/*"
 # end
 #
-# Methods defined in the helpers block are available in templates
-# helpers do
-#   def some_helper
-#     "Helping"
-#   end
-# end
+helpers do
+  def title
+    current_page.metadata[:page]["title"]
+  end
+end
 
 set :css_dir, 'css'
 set :js_dir, 'js'
@@ -55,8 +54,10 @@ activate :blog do |b|
 end
 
 page "/blog/*", layout: :article_layout
+page "/blog/index.html", layout: :layout
 page "/game/*", layout: :game_layout
 page "/game/index.html", layout: :layout
+page "/about/*", layout: :no_grid
 
 # Build-specific configuration
 configure :development do

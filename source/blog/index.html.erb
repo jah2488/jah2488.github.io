@@ -1,0 +1,12 @@
+---
+title: Posts
+---
+<ul class='posts-list'>
+  <h1><%= title %></h1>
+  <% blog('posts').articles[0...50].each do |article| %>
+    <li>
+      <h4><a href="<%= article.url %>"><%= article.title %></a> <time mobile='<%= article.date.strftime("%m/%d/%y") %>' time='<%= article.date.strftime('%b %e %Y') %>'></time> </h4>
+    </li>
+  <% end %>
+</ul>
+
