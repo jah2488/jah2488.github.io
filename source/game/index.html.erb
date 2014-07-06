@@ -2,18 +2,11 @@
 title: Games
 ---
 <ul class='posts-list games-list'>
+  <h1><%= title %></h1>
   <% blog('games').articles[0...50].each do |article| %>
-    <li>
-      <h4><a href="<%= article.url %>"><%= article.title %></a> <time mobile='<%= article.date.strftime("%m/%d/%y") %>' time='<%= article.date.strftime('%b %e %Y') %>'></time> </h4>
-    </li>
-    <li>
-      <%= image_tag 'photo.png' %>
+    <li style='background: url(../img/<%= article.metadata[:page]["name"] || article.title %>.png);'>
+      <h4><a href="<%= article.url %>"><%= article.title %></a></h4>
     </li>
   <% end %>
 </ul>
 
-<% blog('games').articles[0...50].each do |article| %>
-  <div class='three columns'>
-        <h4><a href="<%= article.url %>"><%= article.title %></a> <time mobile='<%= article.date.strftime("%m/%d/%y") %>' time='<%= article.date.strftime('%b %e %Y') %>'></time> </h4>
-  </div>
-<% end %>
