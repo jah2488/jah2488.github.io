@@ -1,7 +1,7 @@
 git checkout master                   &&
 git merge dev                         &&
 middleman build --verbose             &&
-rm -rf css js 404 LICENSE README blog game talk &&
+rm -rf css js img 404 LICENSE README blog game talk about &&
 cd build                              &&
 mv * .[^.]* ..                        ; # Don't care if this line fails (it will)
 cd ..                                 &&
