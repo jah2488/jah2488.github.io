@@ -1,0 +1,12 @@
+---
+name: LD26
+title: "LD 26 - 'Minimalism'"
+date: 2014-07-09 03:49 UTC
+tags:
+plugin: flash
+---
+Controls: WASD + Space to jump or Arrow Keys
+
+Made in 48 hours for the Ludum Dare game jam. The theme was minimalism.
+
+An unforgiving retro platformer that turned out to be a lot of fun. I've been working on a post jam version of this game for sometime in an attempt to turn it into a full experience.

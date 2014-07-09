@@ -1,0 +1,14 @@
+---
+title: Delve
+date: 2014-07-09 03:28 UTC
+tags:
+name: delve
+width: 512
+height: 480
+plugin: flash
+---
+Controls: WASD to move. Shift for sword. Space to fire arrows. 
+
+The control scheme and most of the visuals were inspired by nes and gba era Zelda titles.
+
+My Entry into the NESJam. I overestimated how much time I would have to devote in the final days leading up to the deadline. My 'submission' is more of a work in progress than anything else.

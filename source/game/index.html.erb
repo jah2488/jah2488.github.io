@@ -5,11 +5,11 @@ title: Games
   <h1><%= title %></h1>
   <% blog('games').articles[0...50].each do |article| %>
     <li style='background-image: url(../img/<%= article.metadata[:page]["name"] || article.title %>.png), -webkit-gradient(linear, left middle, right middle, from(rgba(0,0,0,0)), to(rgba(0,0,0,1)));
-      background-image: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,1)), color-stop(15%,rgba(255,255,255,0.5)), color-stop(28%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0))), url(../img/<%= article.metadata[:page]["name"] || article.title %>.png);
-      background-image: -webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,0.5) 25%, rgba(0,0,0,0) 48%, rgba(0,0,0,0) 100%), url(../img/<%= article.metadata[:page]["name"] || article.title %>.png); /* Chrome10+,Safari5.1+ */
-      background-image: -o-linear-gradient(left,      rgba(255,255,255,1) 0%, rgba(255,255,255,0.5) 25%, rgba(0,0,0,0) 48%, rgba(0,0,0,0) 100%), url(../img/<%= article.metadata[:page]["name"] || article.title %>.png); /* Opera 11.10+ */
-      background-image: -ms-linear-gradient(left,     rgba(255,255,255,1) 0%, rgba(255,255,255,0.5) 25%, rgba(0,0,0,0) 48%, rgba(0,0,0,0) 100%), url(../img/<%= article.metadata[:page]["name"] || article.title %>.png); /* IE10+ */
-      background-image: linear-gradient(to right,     rgba(255,255,255,1) 0%, rgba(255,255,255,0.5) 25%, rgba(0,0,0,0) 48%, rgba(0,0,0,0) 100%), url(../img/<%= article.metadata[:page]["name"] || article.title %>.png); /* W3C */'>
+      background-image: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,1)), color-stop(40%,rgba(255,255,255,0.6)), color-stop(58%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0))), url(../img/<%= article.metadata[:page]["name"] || article.title %>.png);
+      background-image: -webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,0.6) 40%, rgba(0,0,0,0.2) 58%, rgba(0,0,0,0) 100%), url(../img/<%= article.metadata[:page]["name"] || article.title %>.png); /* Chrome10+,Safari5.1+ */
+      background-image: -o-linear-gradient(left,      rgba(255,255,255,1) 0%, rgba(255,255,255,0.6) 40%, rgba(0,0,0,0.2) 58%, rgba(0,0,0,0) 100%), url(../img/<%= article.metadata[:page]["name"] || article.title %>.png); /* Opera 11.10+ */
+      background-image: -ms-linear-gradient(left,     rgba(255,255,255,1) 0%, rgba(255,255,255,0.6) 40%, rgba(0,0,0,0.2) 58%, rgba(0,0,0,0) 100%), url(../img/<%= article.metadata[:page]["name"] || article.title %>.png); /* IE10+ */
+      background-image: linear-gradient(to right,     rgba(255,255,255,1) 0%, rgba(255,255,255,0.6) 40%, rgba(0,0,0,0.2) 58%, rgba(0,0,0,0) 100%), url(../img/<%= article.metadata[:page]["name"] || article.title %>.png); /* W3C */'>
       <h4><a href="<%= article.url %>"><%= article.title %></a></h4>
     </li>
   <% end %>

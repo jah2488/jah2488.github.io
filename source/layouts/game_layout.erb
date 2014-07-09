@@ -1,18 +1,20 @@
 <% wrap_layout :layout do %>
+  <% game_name = current_article.metadata[:page]['name'] || current_article.title %>
   <article>
     <header>
-      <h1><%= current_article.title.titleize %></h1>
+      <h1><%= current_article.title %></h1>
       <date><%= current_article.date.strftime("%b %e, %Y") %></date>
       <hr>
     </header>
     <div id='game-content'>
-      <%= partial "game/#{current_article.metadata[:page]['plugin']}", locals: { title: current_article.metadata[:page]['name'] || current_article.title, width: current_article.metadata[:page]['width'], height: current_article.metadata[:page]['height'] } %>
+      <%= partial "game/#{current_article.metadata[:page]['plugin']}", locals: { title: game_name, width: current_article.metadata[:page]['width'], height: current_article.metadata[:page]['height'] } %>
     </div>
     <%= yield %>
+    <!-- Maybe later, Hey you reading this. You can just download the game now if you want from these links.
     <p>
-      <a href="https://dl.dropboxusercontent.com/u/3496603/<%= current_article.title %>/<%= current_article.title %>.swf" target="_blank" >SWF Download</a> |
-      <a href="https://dl.dropboxusercontent.com/u/3496603/<%= current_article.title %>/<%= current_article.title %>.zip" target="_blank" >OS X Download</a>
-    </p>
+      <a href="https://dl.dropboxusercontent.com/u/3496603/<%= game_name %>/<%= game_name %>.swf" target="_blank" >SWF Download</a> |
+      <a href="https://dl.dropboxusercontent.com/u/3496603/<%= game_name %>/<%= game_name %>.zip" target="_blank" >OS X Download</a>
+    </p>-->
     <footer>
       <hr>
       <a href="https://twitter.com/share" class="twitter-share-button" data-count='none' data-via="jah2488" data-lang="en">Tweet</a>
