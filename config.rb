@@ -67,10 +67,10 @@ configure :development do
 end
 
 configure :build do
-  # activate :minify_css
-  # activate :minify_javascript
-  # activate :minify_html
-  # activate :imageoptim
+  activate :minify_css
+  activate :minify_javascript
+  activate :minify_html
+  activate :imageoptim
   set :relative_links, true
 
   activate :directory_indexes
