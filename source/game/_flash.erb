@@ -1,18 +1,19 @@
 <script type="text/javascript" src="https://dl.dropboxusercontent.com/u/3496603/swfobject.js"></script>
 <script type="text/javascript">
   function loadGame() {
-    swfobject.embedSWF("https://dl.dropboxusercontent.com/u/3496603/<%= title %>/<%= title %>.swf", "nme-application", <%= width || "640" %>, <%= height || "480" %>, "10.1", "https://dl.dropboxusercontent.com/u/3496603/expressInstall.swf", {});
-    document.getElementsByClassName('play')[0].remove();
+      swfobject.embedSWF("https://dl.dropboxusercontent.com/u/3496603/<%= title %>/<%= title %>.swf", "nme-application", <%= width || "640" %>, <%= height || "480" %>, "10.1", "https://dl.dropboxusercontent.com/u/3496603/expressInstall.swf", {});
+      document.getElementsByClassName('play')[0].remove();
   }
 
   function positionPlay() {
-    var play = document.getElementsByClassName('play')[0];
-    var game = document.getElementById('game-wrapper');
+      var play = document.getElementsByClassName('play')[0];
+      var game = document.getElementById('game-wrapper');
 
-    play.style.left = (game.offsetWidth  / 2 - play.offsetWidth  / 2) + "px";
-    play.style.top  = (game.offsetHeight / 2 - play.offsetHeight / 2) + "px";
+      play.style.left = (game.offsetWidth  / 2 - play.offsetWidth  / 2) + "px";
+      play.style.top  = (game.offsetHeight / 2 - play.offsetHeight / 2) + "px";
   }
 </script>
+<style>#game-wrapper { width: <%= width %>px; height: <%= height %>px; }</style>
 <div id="wrapper-wrapper">
   <div id="game-wrapper" onclick='loadGame()'>
     <div id="nme-application"></div>

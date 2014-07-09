@@ -53,6 +53,8 @@ activate :blog do |b|
   b.permalink = '{title}.html'
 end
 
+page "/talk/*", layout: :article_layout
+page "/talk/index.html", layout: :layout
 page "/blog/*", layout: :article_layout
 page "/blog/index.html", layout: :layout
 page "/game/*", layout: :game_layout
