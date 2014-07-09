@@ -1,5 +1,5 @@
 ---
-title: 10 Seconds
+title: LD 27 - '10 Seconds'
 name: NoTime
 date: 2014-07-04 20:23 UTC
 tags:
