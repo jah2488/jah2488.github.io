@@ -56,24 +56,28 @@
 <p>Sometimes the new language may even come with an existing codebase. Being attentive is imperative when approaching an existing code base. While it's easy to open an existing project and just scan through the files until you think it make sense, it requires digging deep into the code to really understand what is going on. Taking the time to read through the tests, looking at the code associated with what you want to write, and seeing that it's what you expected can save you from suprises later. The time it takes to feel acclimated to a new project depends on the size of the code base and on the developer.</p>
 <h3>Writing For The Language or Packing Wisely</h3>
 <p>When moving to a new language, its important to bring our patterns, principles, and the skills we have learned over the years with us, but we need to be mindful not to bring with us idioms and conventions that do not apply. Take for example a simple function that prints a report written in ruby.</p>
-<pre>def PrintReport ( reportObjects )
- i = 0;
- while ( i &lt; reportObjects.size ) do
- Kernel.printf ( "Object #" + i.to_s + " ");
- Kernel.printf ( reportObjects[i].data + "\n");
- i += 1;
- end
-end
-</pre>
-<p><br /></p>
+
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre><pre class="lineno">6</pre><pre class="lineno">7</pre><pre class="lineno">8</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">PrintReport</span> <span class="p">(</span> <span class="n">reportObjects</span> <span class="p">)</span>
+ <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="k">while</span> <span class="p">(</span> <span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">reportObjects</span><span class="p">.</span><span class="nf">size</span> <span class="p">)</span> <span class="k">do</span>
+ <span class="no">Kernel</span><span class="p">.</span><span class="nf">printf</span> <span class="p">(</span> <span class="s2">"Object #"</span> <span class="o">+</span> <span class="n">i</span><span class="p">.</span><span class="nf">to_s</span> <span class="o">+</span> <span class="s2">" "</span><span class="p">);</span>
+ <span class="no">Kernel</span><span class="p">.</span><span class="nf">printf</span> <span class="p">(</span> <span class="n">reportObjects</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">.</span><span class="nf">data</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span>
+ <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+ <span class="k">end</span>
+<span class="k">end</span>
+</pre></td></tr></tbody></table>
+</div>
+
 <p>Even though the above code is perfectly valid Ruby syntax, I think any Ruby developer would be sent through the roof if they came across this code while working. While bringing over what we know to a new language or environment is important, it's also important to adapt that to the style or common idioms of that language. For instance, in Ruby, it's normally frowned upon to use loops when you can leverage the Enumerable library to do that work for you. We could write that previous code in a more Ruby style like this:</p>
-<pre>def print_report(report_objs)
-report_objs.each_with_index do |object, index|
-puts "Object ##{index} #{object.data}"
-end
-end
-</pre>
-<p><br /></p>
+
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">print_report</span><span class="p">(</span><span class="n">report_objs</span><span class="p">)</span>
+  <span class="n">report_objs</span><span class="p">.</span><span class="nf">each_with_index</span> <span class="k">do</span> <span class="o">|</span><span class="n">object</span><span class="p">,</span> <span class="n">index</span><span class="o">|</span>
+    <span class="nb">puts</span> <span class="s2">"Object #</span><span class="si">#{</span><span class="n">index</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">object</span><span class="p">.</span><span class="nf">data</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></td></tr></tbody></table>
+</div>
+
 <p>We can leave the debate on whether this is perfectly formatted and styled code for another day, but what we do have here is an example of code written in a style that is familiar to other Ruby designers in this code base. (While both examples are functional, most would agree that one version is more [refined/elegant/simple?)) We don't want to bring our baggage with us from our previous languages or environments. At the same time, that doesn't mean we need to abandon all that we know when we move on to something new.</p>
 <h3>On Getting Stuck</h3>
 <p>There will be plenty of times when you'll find yourself stuck; this is simply part of the daily life of a developer. But getting stuck can be especially frustrating when the syntax or libraries you're working in seem foreign to you. In these times, don't fret, and make sure not to stare into the abyss (lest the abyss stare back into you). Write another test — you may be stuck because your test was taking too big of a step and you needed a smaller one to drive you to your next step. Go back and read through more of the codebase and see how others approached similar situations.</p>
