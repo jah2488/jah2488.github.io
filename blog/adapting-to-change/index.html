@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Adapting To Change</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,800,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Sofia' rel='stylesheet' type='text/css'>
+        <link href="../../css/normalize.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/base.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/skeleton.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/main.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/github.css" rel="stylesheet" type="text/css" />
+        <script src="../../js/vendor/modernizr-2.6.1.min.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]> <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p> <![endif]-->
+        <header>
+          <div id='header-wrap' class='container clearfix'>
+            <div class='seven columns'>
+              <nav>
+                <ul>
+                  <li><a href='/about'>about</a></li>
+                  <li><a href='/blog'>posts</a></li>
+                  <li><a href='/game'>games</a></li>
+                  <li><a href='/talk'>talks</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class='nine columns'>
+              <h1> <a href='/'> JUSTIN HERRICK </a> </h1>
+              <h2>Software Craftsperson, Game Designer, and Educator</h2>
+            </div>
+          </div>
+        </header>
+
+          <div id='wrapper' class='wrapper container'>
+      <article>
+    <header>
+      <h1>Adapting To Change</h1>
+      <date>Jul  9, 2014</date>
+      <hr>
+    </header>
+    <p><em>This post was originally posted to the <a target="_blank" href="http://blog.8thlight.com/">8th Light blog</a> on September 18, 2012.</em></p>
+<h2><br /></h2>
+<h2>“The only constant is Change.”&nbsp;<br />— Heraclitus</h2>
+<p>While it was doubtful that Heraclitus was addressing developers, the sentiment certainly still applies. As developers, we live in a world of constantly changing requirements, code bases, tools, and languages. Once we've found our work flow, it is easy to become resistant to change and to new concepts or tools. Facing a new language can seem daunting at first, but have no fear; adapting to a changing environment is not as bad as it seems, and expanding your toolbox with new languages and idioms will make you a better developer. As software professionals we simply need to keep a few things in mind when approaching these new situations.</p>
+<h3>Be Curious And Attentive</h3>
+<p id="yui_3_17_2_1_1404879185423_18422">Genuine curiosity can and should be utilized when trying to learn something new. If you are faced with going from a language like ruby to a functional language like Clojure. It may be a good idea to read up on&nbsp;<a data-cke-saved-href="http://blog.8thlight.com/uncle-bob/2012/08/24/functional-programming-for-the-object-oriented-programmer.html" href="http://blog.8thlight.com/uncle-bob/2012/08/24/functional-programming-for-the-object-oriented-programmer.html" id="yui_3_17_2_1_1404879185423_18421">functional paradigms</a>, the&nbsp;<a data-cke-saved-href="http://paulgraham.com/lisphistory.html" href="http://paulgraham.com/lisphistory.html">history of Lisp</a>, or on&nbsp;<a data-cke-saved-href="http://en.wikipedia.org/wiki/Polish_notation#Computer_programming" href="http://en.wikipedia.org/wiki/Polish_notation#Computer_programming">Polish Syntax</a>. Find what interests you and explore.</p>
+<p>Sometimes the new language may even come with an existing codebase. Being attentive is imperative when approaching an existing code base. While it's easy to open an existing project and just scan through the files until you think it make sense, it requires digging deep into the code to really understand what is going on. Taking the time to read through the tests, looking at the code associated with what you want to write, and seeing that it's what you expected can save you from suprises later. The time it takes to feel acclimated to a new project depends on the size of the code base and on the developer.</p>
+<h3>Writing For The Language or Packing Wisely</h3>
+<p>When moving to a new language, its important to bring our patterns, principles, and the skills we have learned over the years with us, but we need to be mindful not to bring with us idioms and conventions that do not apply. Take for example a simple function that prints a report written in ruby.</p>
+<pre>def PrintReport ( reportObjects )
+ i = 0;
+ while ( i &lt; reportObjects.size ) do
+ Kernel.printf ( "Object #" + i.to_s + " ");
+ Kernel.printf ( reportObjects[i].data + "\n");
+ i += 1;
+ end
+end
+</pre>
+<p><br /></p>
+<p>Even though the above code is perfectly valid Ruby syntax, I think any Ruby developer would be sent through the roof if they came across this code while working. While bringing over what we know to a new language or environment is important, it's also important to adapt that to the style or common idioms of that language. For instance, in Ruby, it's normally frowned upon to use loops when you can leverage the Enumerable library to do that work for you. We could write that previous code in a more Ruby style like this:</p>
+<pre>def print_report(report_objs)
+report_objs.each_with_index do |object, index|
+puts "Object ##{index} #{object.data}"
+end
+end
+</pre>
+<p><br /></p>
+<p>We can leave the debate on whether this is perfectly formatted and styled code for another day, but what we do have here is an example of code written in a style that is familiar to other Ruby designers in this code base. (While both examples are functional, most would agree that one version is more [refined/elegant/simple?)) We don't want to bring our baggage with us from our previous languages or environments. At the same time, that doesn't mean we need to abandon all that we know when we move on to something new.</p>
+<h3>On Getting Stuck</h3>
+<p>There will be plenty of times when you'll find yourself stuck; this is simply part of the daily life of a developer. But getting stuck can be especially frustrating when the syntax or libraries you're working in seem foreign to you. In these times, don't fret, and make sure not to stare into the abyss (lest the abyss stare back into you). Write another test — you may be stuck because your test was taking too big of a step and you needed a smaller one to drive you to your next step. Go back and read through more of the codebase and see how others approached similar situations.</p>
+<p>With every new project, language, or codebase we bring with us our SOLID principles, TDD, and the patterns and principles that we have crafted over our career. Making the jump to becoming a polyglot developer may seem difficult at first, but each additional language is easier than the last, and you'll look back at all you've learned and be ready for more.</p>
+
+    <footer>
+      <hr>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-count='none' data-via="jah2488" data-lang="en">Tweet</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </footer>
+  </article>
+
+  </div>
+
+
+        <footer>
+        </footer>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.1.3/zepto.min.js"></script>
+        <script src="../../js/plugins.js" type="text/javascript"></script>
+        <script src="../../js/main.js" type="text/javascript"></script>
+    </body>
+</html>
+

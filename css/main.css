@@ -105,25 +105,17 @@ textarea {
     font-style: normal;
 }
 
-@font-face {
-    font-family: 'Brandon Grotesque';
-    src: url('Brandon_blk.otf') format('otf');
-    font-weight: normal;
-    font-style: normal;
-}
-
-/*h1, h2, h3, h4 { font-family: "Brandon Grotesque", "Futura", Helvetica, Arial, sans-serif; }*/
 h1, h2, h3, h4 { font-family: "Montserrat", "Futura", Helvetica, Arial, sans-serif; }
 
 a, a:visited {
   color: white;
   text-decoration:none;
-  font-size: 1.3em;
+  font-size: 1.2em;
 }
 
 nav a {
-    font-family: "Brandon Grotesque", "Futura", Helvetica, Arial, sans-serif;
-    font-weight: 400;
+    font-family: "Montserrat", "Futura", Helvetica, Arial, sans-serif;
+    font-weight: 300;
 }
 
 nav a:hover {
@@ -143,7 +135,7 @@ header {
 header h1 {
     color: white;
     font-weight: bolder;
-    font-size: 3.4em;
+    font-size: 3em;
     margin: .3em 0 0 1em;
     text-align: right;
 }
@@ -182,7 +174,6 @@ nav ul li:not(:last-child):after {
   color: #0f0a06;
   content: '';
 }
-
 
 /*  BLOG | POSTS | INDEX */
 
@@ -239,19 +230,17 @@ ul.games-list li {
   padding-top: 0;
 }
 .games-list li h4 a {
-  color: white;
-  text-shadow: -1px -1px 0px #5a5a5a;
   display:block;
   padding: 0.4em;
 }
-.games-list li:hover {
+.games-list li {
   -webkit-filter: grayscale(80%);
   -moz-filter: grayscale(80%);
   -o-filter: grayscale(80%);
   -ms-filter: grayscale(80%);
   filter: grayscale(80%);
 }
-.games-list li {
+.games-list li:hover {
   -webkit-filter: grayscale(10%);
   -moz-filter: grayscale(10%);
   -o-filter: grayscale(10%);
@@ -262,10 +251,11 @@ ul.games-list li {
 /*== About ==*/
 .full-width {
   position:relative;
-  background: rgba(0,0,0,0.6) url('../img/me.jpg');
+  background: rgba(0,0,0,0.44) url('../img/me.jpg');
   background-size: cover;
   height: 100%;
 }
+
 .full-width:before {
   position:absolute;
   top: 0; right: 0; bottom: 0; left: 0;
@@ -274,12 +264,12 @@ ul.games-list li {
 }
 .full-width h2 {
   color:white;
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .full-width p {
   color:white;
   font-size: 1.4em;
-  font-family: "goudy_bookletter_1911regular", "Times New Roman", Times New Roman, serif;
+  font-family: "Open Sans", "Times New Roman", Times New Roman, serif;
 }
 
 .centered {
@@ -334,7 +324,7 @@ article p {
 }
 
 article footer {
-    font-family: "Brandon Grotesque", "Futura", Helvetica, Arial, sans-serif;
+    font-family: "Montserrat", "Futura", Helvetica, Arial, sans-serif;
     font-size: 1em;
     margin: 1.4em 0;
     color: #196375;
