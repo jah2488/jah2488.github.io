@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Investing In Our Tools</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,800,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Sofia' rel='stylesheet' type='text/css'>
+        <link href="../../css/normalize.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/base.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/skeleton.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/main.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/github.css" rel="stylesheet" type="text/css" />
+        <script src="../../js/vendor/modernizr-2.6.1.min.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]> <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p> <![endif]-->
+        <header>
+          <div id='header-wrap' class='container clearfix'>
+            <div class='seven columns'>
+              <nav>
+                <ul>
+                  <li><a href='/about'>about</a></li>
+                  <li><a href='/blog'>posts</a></li>
+                  <li><a href='/game'>games</a></li>
+                  <li><a href='/talk'>talks</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class='nine columns'>
+              <h1> <a href='/'> JUSTIN HERRICK </a> </h1>
+              <h2>Software Craftsperson, Game Designer, and Educator</h2>
+            </div>
+          </div>
+        </header>
+
+          <div id='wrapper' class='wrapper container'>
+      <article>
+    <header>
+      <h1>Investing In Our Tools</h1>
+      <date>Jul  9, 2014</date>
+      <hr>
+    </header>
+    <p><em>This post was originally posted to the&nbsp;<a target="_blank" href="http://blog.8thlight.com/">8th Light blog</a>&nbsp;on February 11, 2013.</em></p>
+<p>&nbsp;</p>
+<p>As developers our workspaces are important to us. As software craftspeople, our tools are part of who we are. How many times do we settle for tools that do not fit our needs or our own style or continue to work in an environment which is counterproductive? We should invest the time in continually improving our tools and how we use them.</p>
+<p>Taking time away from writing code to work on&nbsp;<span>how</span>&nbsp;we write our code might seem unproductive at first, but the small increases in productivity will compound immensely over time. Considering the way we write our code can help us see needless repetition in our daily schedules. Removing this repetition can simplify both our routine and our code. Along with the opportunity to remove repetitive tasks, we can lessen the burden of stressful manual tasks. The more automation the better.</p>
+<h2>The Command Line</h2>
+<p>Few developers take full advantage of the power and flexibility of the command line. Leveraging the simple ability to alias methods can save minutes or hours of time every day. These methods include the very common, and useful, git shorthands:</p>
+
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre></td><td class="code"><pre><span class="o">[</span>~] gco release <span class="c"># git checkout release</span>
+<span class="o">[</span>~] gst <span class="c"># git status</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>They also include a much more complex ‘find string in current directory’ command.</p>
+
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre></td><td class="code"><pre><span class="o">[</span>~] findInDir <span class="s1">'socks'</span> <span class="c"># find . -name "*" | grep 'socks' -n</span>
+ 30:./app/controllers/drawers_controller.rb
+ 45:./spec/controllers/drawers_controller_spec.rb
+</pre></td></tr></tbody></table>
+</div>
+
+<p>That is about as complex as we want to get with aliases. In most cases, for anything more complex, we would rely on custom shell scripts or functions. Such a function could return all routes that include a given string:</p>
+
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre><pre class="lineno">6</pre></td><td class="code"><pre><span class="o">[</span>~] routesWith publication <span class="c"># routesWith() { be rake routes | grep "$\*"; }</span>
+  new_publication GET/publications/new<span class="o">(</span>.:format<span class="o">)</span> publications#new
+  edit_publication GET/publications/:id/edit<span class="o">(</span>.:format<span class="o">)</span> publications#edit
+  publication GET/publications/:id<span class="o">(</span>.:format<span class="o">)</span>publications#show
+  PUT/publications/:id<span class="o">(</span>.:format<span class="o">)</span>publications#update
+  DELETE /publications/:id<span class="o">(</span>.:format<span class="o">)</span>publications#destroy
+</pre></td></tr></tbody></table>
+</div>
+
+<h2>The Editor</h2>
+<p>It is hard to think of anything more essential to a developer's work than a text editor. Although we may never decide on what the perfect editor is, there is little disagreement on its importance. The editor we use should suit how we work. It is in our own best interest to invest in learning how to use it. Nearly every editor allows users to modify its settings to best fit individual styles and needs. This can be done through plugins, custom macros, or other means.</p>
+<p>My editor of choice currently is vim, so all editor related examples in this post will be in vim parlance.</p>
+<p>Consider running rspec tests. We can run these tests in another window or tab, or quit the editor and run them from the command line.</p>
+<p>What if we wanted to run the tests without leaving the editor? In vim we have several options. The first and most obvious would be to shell out and run the rspec command directly.</p>
+
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>  <span class="p">:</span><span class="o">!</span><span class="n">rspec</span> <span class="n">spec</span><span class="o">/</span><span class="n">models</span><span class="o">/</span><span class="n">drawers_spec</span><span class="p">.</span><span class="nf">rb</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>While this runs the command in only a few simple steps, we can do better. Adding this line into our .vimrc along with a keyboard shortcut will drastically speed up this process.</p>
+
+<div class="highlight viml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre></td><td class="code"><pre><span class="c">".vimrc</span>
+<span class="k">function</span><span class="p">!</span> RunRspec<span class="p">()</span>
+exec <span class="s1">'!rspec spec/models/drawers_spec.rb'</span>
+<span class="k">endfunction</span>
+map <span class="p">&lt;</span>leader<span class="p">&gt;</span>rt <span class="p">:</span><span class="k">call</span> RunRspec<span class="p">()&lt;</span>CR<span class="p">&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Now when we reload our editor we can run our tests almost instantly. On the other hand, we have just hard coded a command that only runs a single file. If we generalize this code, we can not only make it run the current file, but also the current test only.</p>
+
+<div class="highlight viml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre></td><td class="code"><pre><span class="c">".vimrc</span>
+<span class="k">function</span><span class="p">!</span> RunSingleSpec<span class="p">()</span>
+exec <span class="s1">'!rspec % -l '</span> <span class="p">.</span> line<span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
+<span class="k">endfunction</span>
+map <span class="p">&lt;</span>leader<span class="p">&gt;</span>rt <span class="p">:</span><span class="k">call</span> R
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Now we have drastically sped up the time it takes to go from writing a test to running that test and seeing the resulting output. Besides user defined macros, every popular editor comes with a plethora of plugins to alter or extend its functionality. My personal favorites are vim keybindings for all editors that are not vim itself. For vim itself, I enjoy plugins that lend some form of code completion and project navigation. When approaching the idea of plugins, it is best to know what you like and want, and not to go for everything that is out there. Spending time to find high quality, well-maintained plugins is well worth it in the long run. Using and living with a plugin that is unmaintained, or worse buggy, is a drain on productivity and the opposite of what we're looking for.</p>
+<p>When looking for editor plugins, don't forget that there is always the option to contribute to existing plugins, improving the ones already out there or creating your own. While this may be a time investment not everyone wants to make, it can be personally rewarding for those who do.</p>
+<p>Last, but certainly not least is the look and feel of your editor. Your color scheme will not only affect the way you see your code, but in some ways will affect how people perceive you. Many themes are simply named after the person who created them.</p>
+<p>Once you've settled on a few color schemes you enjoy, look at your font. Is it really the best font for your eyes and preferences? The growing options of excellent free mono space fonts means there is little reason to settle for standard ones such as monaco.</p>
+<p>You may want to also consider paddings, margins, and line-height. However, it is best not to become obsessive about every pixel. We can use macros and plugins to make our workspace efficient, and colors and fonts to make it our own.</p>
+<p>These ideas are not meant to consume us with minute details and optimizations, or to have us spend all of our time working on our tools. It is to recognize the importance of the tools we use every day. It is important to look critically at the tools we have chosen and make the effort to improve and invest in them. We currently give our tools and workspace our time whether we want to or not. By spending time improving our tools themselves and how we use them, we can not only save time by being more productive, but we can be proud of those tools.</p>
+
+    <footer>
+      <hr>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-count='none' data-via="jah2488" data-lang="en">Tweet</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </footer>
+  </article>
+
+  </div>
+
+
+        <footer>
+        </footer>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.1.3/zepto.min.js"></script>
+        <script src="../../js/plugins.js" type="text/javascript"></script>
+        <script src="../../js/main.js" type="text/javascript"></script>
+    </body>
+</html>
+
