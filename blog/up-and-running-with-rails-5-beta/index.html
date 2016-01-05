@@ -49,13 +49,13 @@
     </header>
     <p>I decided to try out rails 5 on a new side project last night and could not find any useful guides. After some googling I was able to get everything up and running and documented my process below. Hope someone finds this helpful.</p>
 
-<p>To install the rails beta, you need to supply the <strong>–pre</strong> flag to the gem install command.</p>
+<p>To install the rails beta gem, you need to supply the <strong>–pre</strong> flag to the gem install command.</p>
 
 <div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>gem install rails --pre
 </pre></td></tr></tbody></table>
 </div>
 
-<p>Oh no, that didn't work.</p>
+<p>Oh no, that didn't work (for me, YMMV).</p>
 
 <div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
@@ -65,41 +65,35 @@ ERROR:  Error installing rails:
 </pre></td></tr></tbody></table>
 </div>
 
-<p>Rails 5 includes <a href="https://github.com/rails/rails/tree/master/actioncable">ActionCable</a>, which depends on <a href="https://github.com/eventmachine/eventmachine">EventMachine</a> (and a <a href="https://github.com/celluloid/celluloid">few</a> <a href="https://github.com/faye/faye-websocket-ruby">other</a> <a href="http://redis.io/">libraries</a>). So you need to be able to install EventMachine, and the error I was having was because my version of <strong>OpenSSL</strong> was out of date. Updating it with <a href="http://brew.sh/">homebrew</a> was needed since I'm on El Capitan and Apple changed some things.</p>
+<p>Rails 5 includes <a href="https://github.com/rails/rails/tree/master/actioncable">ActionCable</a>, which depends on <a href="https://github.com/eventmachine/eventmachine">EventMachine</a> (and a <a href="https://github.com/celluloid/celluloid">few</a> <a href="https://github.com/faye/faye-websocket-ruby">other</a> <a href="http://redis.io/">libraries</a>). So you need to be able to install EventMachine. The error I was having was because my version of <strong>OpenSSL</strong> was out of date. I updated it with <a href="http://brew.sh/">homebrew</a>.</p>
 
 <div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>brew upgrade openssl
 </pre></td></tr></tbody></table>
 </div>
 
-<p>or</p>
-
-<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>brew install openssl
-</pre></td></tr></tbody></table>
-</div>
-
-<p>If you want to use the new rails command to generate apps using the <strong>–api</strong> flag at this point you'll need to update your rails binary, which is done via <strong>Railties</strong>. This is generally why you'd want to use something like a <a href="https://rvm.io/gemsets/basics">gemset</a> or whatever the equivalent is for your ruby version manager of choice.</p>
-
-<p>For my current needs, I can just blow away my existing rails installation completely and install Rails over it.</p>
+<p>I really want to use the updated rails generator so I can use the <strong>–api</strong> flag. So I'll need to update my rails binary. The rails binary is managed via the <strong>Railties</strong> gem. This is generally where you'd want to use something like an <a href="https://rvm.io/gemsets/basics">rvm gemset</a> or the equivalent for your ruby version manager of choice. For my current needs, I can just blow away my existing rails installation completely and install Rails over it.</p>
 
 <div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>gem uninstall rails railties
 </pre></td></tr></tbody></table>
 </div>
 <p><a href="http://stackoverflow.com/questions/16164697/uninstall-rails-completely">More Info</a></p>
 
-<p>Now lets try installing the gem again. To speed things up, I'll skip over a few of the other errors I ran into that led me to this solution. Great, we installed openssl, but if the gems being installed can't find those headers, it doesn't help us much.</p>
+<p>Now lets try installing the gem again. We installed <strong>OpenSSL</strong>, but if the gems being installed can't find those headers, it doesn't help us. We will need to pass some compiler flags to the gem install command.</p>
 
 <div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>gem install --pre -- --with-cppflags<span class="o">=</span>-I/usr/local/opt/openssl/include
 </pre></td></tr></tbody></table>
 </div>
-<p>More info on how this works can be <a href="http://stackoverflow.com/questions/6761670/is-there-any-way-to-change-gcc-compilation-options-for-a-gem">found here</a></p>
+<p><a href="http://stackoverflow.com/questions/6761670/is-there-any-way-to-change-gcc-compilation-options-for-a-gem">More info</a></p>
 
 <p>So now we have Rails 5 beta installed, this can be verified by checking the rails gems you have installed.</p>
 
-<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>gem list --local | grep rails
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre>gem list --local | grep rails
+rails --version
 </pre></td></tr></tbody></table>
 </div>
 
-<p>Congrats! You have Rails 5 up and running. I highly suggest you read up on some of the changes and try out the new features. I am really excited to finally have an official solution for writing APIs in rails, that cuts down out all the pieces I don't need.</p>
+<p>Congrats! You have Rails 5 up and running. I suggest you read up on some of the changes and try out the new features. I am really excited to finally have an official solution for writing APIs in rails, that cuts down out all the pieces I don't need.</p>
 
 <p>More reading:</p>
 
