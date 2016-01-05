@@ -121,7 +121,7 @@ nav a:hover {
 /* header */
 header {
   color: #CACACA;
-  background-color: #196375; 
+  background-color: #196375;
 /*    background-color: #da7c6f; */
   top:0;
   width:100%;
@@ -316,7 +316,7 @@ article a:hover {
 
 article p {
     font-family: "goudy_bookletter_1911regular", "Times New Roman", Times New Roman, serif;
-    font-size: 1.3em;
+    font-size: 1.5em;
 }
 
 article footer {
