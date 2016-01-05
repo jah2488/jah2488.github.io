@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Up and Running with Rails 5 Beta</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,800,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Sofia' rel='stylesheet' type='text/css'>
+        <link href="../../css/normalize.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/base.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/skeleton.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/main.css" rel="stylesheet" type="text/css" />
+        <link href="../../css/github.css" rel="stylesheet" type="text/css" />
+        <script src="../../js/vendor/modernizr-2.6.1.min.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]> <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p> <![endif]-->
+        <header>
+          <div id='header-wrap' class='container clearfix'>
+            <div class='seven columns'>
+              <nav>
+                <ul>
+                  <li><a href='/about'>about</a></li>
+                  <li><a href='/blog'>posts</a></li>
+                  <li><a href='/game'>games</a></li>
+                  <li><a href='/talk'>talks</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class='nine columns'>
+              <h1> <a href='/'> JUSTIN HERRICK </a> </h1>
+              <h2>Software Craftsperson, Game Designer, and Educator</h2>
+            </div>
+          </div>
+        </header>
+
+          <div id='wrapper' class='wrapper container'>
+      <article>
+    <header>
+      <h1>Up And Running With Rails 5 Beta</h1>
+      <date>Jan  5, 2016</date>
+      <hr>
+    </header>
+    <p>I decided to try out rails 5 on a new side project last night and could not find any useful guides. After some googling I was able to get everything up and running and documented my process below. Hope someone finds this helpful.</p>
+
+<p>To install the rails beta, you need to supply the <strong>–pre</strong> flag to the gem install command.</p>
+
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>gem install rails --pre
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Oh no, that didn't work.</p>
+
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre>Fetching: eventmachine-1.0.8.gem <span class="o">(</span>100%<span class="o">)</span>
+ERROR:  Error installing rails:
+	ERROR: Failed to build gem native extension.
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Rails 5 includes <a href="https://github.com/rails/rails/tree/master/actioncable">ActionCable</a>, which depends on <a href="https://github.com/eventmachine/eventmachine">EventMachine</a> (and a <a href="https://github.com/celluloid/celluloid">few</a> <a href="https://github.com/faye/faye-websocket-ruby">other</a> <a href="http://redis.io/">libraries</a>). So you need to be able to install EventMachine, and the error I was having was because my version of <strong>OpenSSL</strong> was out of date. Updating it with <a href="http://brew.sh/">homebrew</a> was needed since I'm on El Capitan and Apple changed some things.</p>
+
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>brew upgrade openssl
+</pre></td></tr></tbody></table>
+</div>
+
+<p>or</p>
+
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>brew install openssl
+</pre></td></tr></tbody></table>
+</div>
+
+<p>If you want to use the new rails command to generate apps using the <strong>–api</strong> flag at this point you'll need to update your rails binary, which is done via <strong>Railties</strong>. This is generally why you'd want to use something like a <a href="https://rvm.io/gemsets/basics">gemset</a> or whatever the equivalent is for your ruby version manager of choice.</p>
+
+<p>For my current needs, I can just blow away my existing rails installation completely and install Rails over it.</p>
+
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>gem uninstall rails railties
+</pre></td></tr></tbody></table>
+</div>
+<p><a href="http://stackoverflow.com/questions/16164697/uninstall-rails-completely">More Info</a></p>
+
+<p>Now lets try installing the gem again. To speed things up, I'll skip over a few of the other errors I ran into that led me to this solution. Great, we installed openssl, but if the gems being installed can't find those headers, it doesn't help us much.</p>
+
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>gem install --pre -- --with-cppflags<span class="o">=</span>-I/usr/local/opt/openssl/include
+</pre></td></tr></tbody></table>
+</div>
+<p>More info on how this works can be <a href="http://stackoverflow.com/questions/6761670/is-there-any-way-to-change-gcc-compilation-options-for-a-gem">found here</a></p>
+
+<p>So now we have Rails 5 beta installed, this can be verified by checking the rails gems you have installed.</p>
+
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>gem list --local | grep rails
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Congrats! You have Rails 5 up and running. I highly suggest you read up on some of the changes and try out the new features. I am really excited to finally have an official solution for writing APIs in rails, that cuts down out all the pieces I don't need.</p>
+
+<p>More reading:</p>
+
+<ul>
+  <li><a href="http://nithinbekal.com/posts/rails-5-features/">Rails Feature Overview</a></li>
+  <li><a href="http://railsapps.github.io/updating-rails.html">RailsApps Update Guide</a></li>
+</ul>
+
+    <footer>
+      <hr>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-count='none' data-via="jah2488" data-lang="en">Tweet</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </footer>
+  </article>
+
+  </div>
+
+
+        <footer>
+        </footer>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.1.3/zepto.min.js"></script>
+        <script src="../../js/plugins.js" type="text/javascript"></script>
+        <script src="../../js/main.js" type="text/javascript"></script>
+    </body>
+</html>
+

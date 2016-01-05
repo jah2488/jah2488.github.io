@@ -51,15 +51,29 @@
 
 <p>Lately I’ve been switching frequently between Clojure and Ruby. This has me curious about how close I can get Ruby to look like Clojure in size and style. Recently, what has bothered me most has been how you define a namespace in Ruby by nested modules. Compared to other languages like Clojure, Java, or Haxe, Ruby can seem rather verubyose. For example, here’s Clojure:</p>
 
-<div class="highlight clojure"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre></td><td class="code"><pre><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="no">:github.users.repositories.utilities.greeter</span><span class="p">)</span><span class="w">
+<div class="highlight clojure"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="p">(</span><span class="nf">ns</span><span class="w"> </span><span class="no">:github.users.repositories.utilities.greeter</span><span class="p">)</span><span class="w">
 
 </span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">greet</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="s">"hello"</span><span class="p">)</span><span class="w">
 </span></pre></td></tr></tbody></table>
 </div>
 
-<p>This is much more terse than Ruby’s deeply nested namespaces: </p>
+<p>This is much more terse than Ruby’s deeply nested namespaces:</p>
 
-<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre><pre class="lineno">6</pre><pre class="lineno">7</pre><pre class="lineno">8</pre><pre class="lineno">9</pre><pre class="lineno">10</pre><pre class="lineno">11</pre><pre class="lineno">12</pre><pre class="lineno">13</pre></td><td class="code"><pre><span class="k">module</span> <span class="nn">Github</span>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13</pre></td><td class="code"><pre><span class="k">module</span> <span class="nn">Github</span>
   <span class="k">module</span> <span class="nn">Users</span>
     <span class="k">module</span> <span class="nn">Repositories</span>
       <span class="k">module</span> <span class="nn">Utilities</span>
@@ -77,7 +91,11 @@
 
 <p>Even Ruby’s inline syntax, <a href="http://blog.elpassion.com/Ruby-gotchas/">which you may not want to use</a>, seems comparatively clunky:</p>
 
-<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre></td><td class="code"><pre><span class="k">module</span> <span class="nn">Github::Users::Repositories::Utilities::Greeter</span>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="k">module</span> <span class="nn">Github::Users::Repositories::Utilities::Greeter</span>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">greet</span>
     <span class="s1">'hello'</span>
   <span class="k">end</span>
@@ -87,7 +105,11 @@
 
 <p>Lets fix that. What I want is a syntax that lets me state clearly the namespacing in which my code should be found, without needing all that nesting. After a little bit of trial and error, I came up with this syntax. <a href="https://gist.github.com/jah2488/8938747">The original gist of this can be found here.</a></p>
 
-<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre></td><td class="code"><pre><span class="n">ns</span> <span class="s1">'github.users.repositories.utilities.greeter'</span> <span class="k">do</span>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="n">ns</span> <span class="s1">'github.users.repositories.utilities.greeter'</span> <span class="k">do</span>
   <span class="k">def</span> <span class="nf">greet</span>
     <span class="s1">'hello'</span>
   <span class="k">end</span>
@@ -97,7 +119,9 @@
 
 <p>Simple, short, and clean. Now lets walk through the code that does the magic.</p>
 
-<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">ns</span><span class="p">(</span><span class="n">namespace</span><span class="p">,</span> <span class="n">delim</span> <span class="o">=</span> <span class="s1">'.'</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">ns</span><span class="p">(</span><span class="n">namespace</span><span class="p">,</span> <span class="n">delim</span> <span class="o">=</span> <span class="s1">'.'</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
   <span class="n">nest_mod</span><span class="p">(</span><span class="n">namespace</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="n">delim</span><span class="p">),</span> <span class="n">block</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></td></tr></tbody></table>
@@ -105,11 +129,16 @@
 
 <p>The ns method ends up being a wrapper of the method that does all the work and a bridge to the DSL we are providing.</p>
 
-<p>I have an optional parameter specifying what the delimiter is for the namespace. This both provides flexibility in the input we accept and abstracts away having a magic string in the method body. </p>
+<p>I have an optional parameter specifying what the delimiter is for the namespace. This both provides flexibility in the input we accept and abstracts away having a magic string in the method body.</p>
 
 <p>I am taking Ruby’s implicit block and converting to a proc argument for our method. The reasoning behind this is syntax. If the proc were a normal argument, it would make the method call awkward.</p>
 
-<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre><pre class="lineno">6</pre></td><td class="code"><pre><span class="n">ns</span><span class="p">(</span><span class="s1">'greeter'</span><span class="p">,</span> <span class="no">Proc</span><span class="p">.</span><span class="nf">new</span> <span class="p">{</span>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6</pre></td><td class="code"><pre><span class="n">ns</span><span class="p">(</span><span class="s1">'greeter'</span><span class="p">,</span> <span class="no">Proc</span><span class="p">.</span><span class="nf">new</span> <span class="p">{</span>
   <span class="k">def</span> <span class="nf">greet</span>
     <span class="s1">'hi'</span>
   <span class="k">end</span>
@@ -120,7 +149,15 @@
 
 <p>Now for the method that does all the work.</p>
 
-<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre><pre class="lineno">6</pre><pre class="lineno">7</pre><pre class="lineno">8</pre><pre class="lineno">9</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">nest_mod</span><span class="p">(</span><span class="n">mod</span> <span class="o">=</span> <span class="no">Kernel</span><span class="p">,</span> <span class="n">mod_names</span><span class="p">,</span> <span class="n">block</span><span class="p">)</span>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">nest_mod</span><span class="p">(</span><span class="n">mod</span> <span class="o">=</span> <span class="no">Kernel</span><span class="p">,</span> <span class="n">mod_names</span><span class="p">,</span> <span class="n">block</span><span class="p">)</span>
   <span class="k">return</span> <span class="n">mod</span><span class="p">.</span><span class="nf">module_exec</span><span class="p">(</span><span class="o">&amp;</span><span class="n">block</span><span class="p">)</span> <span class="k">if</span> <span class="n">mod_names</span><span class="p">.</span><span class="nf">empty?</span>
   <span class="n">find_or_create_const</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">to_const</span><span class="p">(</span><span class="n">mod_names</span><span class="p">.</span><span class="nf">first</span><span class="p">)).</span><span class="nf">tap</span> <span class="k">do</span> <span class="o">|</span><span class="n">this</span><span class="o">|</span>
     <span class="n">make_module_methods_accessible</span><span class="p">(</span><span class="n">this</span><span class="p">)</span>
@@ -136,7 +173,11 @@
 
 <p>The method begins with the end, the leaf node, the base case, what have you. If there are no more ~module_names~ left, it evaluates the block of code provided in the context of the current module. If there are more ~module_names~, it continues creating nested modules.</p>
 
-<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">find_or_create_const</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">str</span><span class="p">)</span>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">find_or_create_const</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">str</span><span class="p">)</span>
   <span class="k">return</span> <span class="n">mod</span><span class="p">.</span><span class="nf">const_get</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="k">if</span> <span class="n">mod</span><span class="p">.</span><span class="nf">const_defined?</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
   <span class="k">return</span> <span class="n">mod</span><span class="p">.</span><span class="nf">const_set</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="no">Module</span><span class="p">.</span><span class="nf">new</span><span class="p">)</span>
 <span class="k">end</span>
@@ -150,7 +191,9 @@
 
 <p>Moving into the block:</p>
 
-<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">make_module_methods_accessible</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">make_module_methods_accessible</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
   <span class="n">mod</span><span class="p">.</span><span class="nf">module_exec</span> <span class="p">{</span> <span class="kp">extend</span> <span class="nb">self</span> <span class="p">}</span>
 <span class="k">end</span>
 </pre></td></tr></tbody></table>

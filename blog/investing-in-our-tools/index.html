@@ -54,14 +54,17 @@
 <h2>The Command Line</h2>
 <p>Few developers take full advantage of the power and flexibility of the command line. Leveraging the simple ability to alias methods can save minutes or hours of time every day. These methods include the very common, and useful, git shorthands:</p>
 
-<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre></td><td class="code"><pre><span class="o">[</span>~] gco release <span class="c"># git checkout release</span>
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="o">[</span>~] gco release <span class="c"># git checkout release</span>
 <span class="o">[</span>~] gst <span class="c"># git status</span>
 </pre></td></tr></tbody></table>
 </div>
 
 <p>They also include a much more complex ‘find string in current directory’ command.</p>
 
-<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre></td><td class="code"><pre><span class="o">[</span>~] findInDir <span class="s1">'socks'</span> <span class="c"># find . -name "*" | grep 'socks' -n</span>
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="o">[</span>~] findInDir <span class="s1">'socks'</span> <span class="c"># find . -name "*" | grep 'socks' -n</span>
  30:./app/controllers/drawers_controller.rb
  45:./spec/controllers/drawers_controller_spec.rb
 </pre></td></tr></tbody></table>
@@ -69,7 +72,12 @@
 
 <p>That is about as complex as we want to get with aliases. In most cases, for anything more complex, we would rely on custom shell scripts or functions. Such a function could return all routes that include a given string:</p>
 
-<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre><pre class="lineno">6</pre></td><td class="code"><pre><span class="o">[</span>~] routesWith publication <span class="c"># routesWith() { be rake routes | grep "$\*"; }</span>
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6</pre></td><td class="code"><pre><span class="o">[</span>~] routesWith publication <span class="c"># routesWith() { be rake routes | grep "$\*"; }</span>
   new_publication GET/publications/new<span class="o">(</span>.:format<span class="o">)</span> publications#new
   edit_publication GET/publications/:id/edit<span class="o">(</span>.:format<span class="o">)</span> publications#edit
   publication GET/publications/:id<span class="o">(</span>.:format<span class="o">)</span>publications#show
@@ -90,7 +98,11 @@
 
 <p>While this runs the command in only a few simple steps, we can do better. Adding this line into our .vimrc along with a keyboard shortcut will drastically speed up this process.</p>
 
-<div class="highlight viml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre></td><td class="code"><pre><span class="c">".vimrc</span>
+<div class="highlight viml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="c">".vimrc</span>
 <span class="k">function</span><span class="p">!</span> RunRspec<span class="p">()</span>
 exec <span class="s1">'!rspec spec/models/drawers_spec.rb'</span>
 <span class="k">endfunction</span>
@@ -100,7 +112,11 @@ map <span class="p">&lt;</span>leader<span class="p">&gt;</span>rt <span class="
 
 <p>Now when we reload our editor we can run our tests almost instantly. On the other hand, we have just hard coded a command that only runs a single file. If we generalize this code, we can not only make it run the current file, but also the current test only.</p>
 
-<div class="highlight viml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre></td><td class="code"><pre><span class="c">".vimrc</span>
+<div class="highlight viml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="c">".vimrc</span>
 <span class="k">function</span><span class="p">!</span> RunSingleSpec<span class="p">()</span>
 exec <span class="s1">'!rspec % -l '</span> <span class="p">.</span> line<span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
 <span class="k">endfunction</span>

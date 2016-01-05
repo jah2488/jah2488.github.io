@@ -57,11 +57,18 @@
 <h3>Writing For The Language or Packing Wisely</h3>
 <p>When moving to a new language, its important to bring our patterns, principles, and the skills we have learned over the years with us, but we need to be mindful not to bring with us idioms and conventions that do not apply. Take for example a simple function that prints a report written in ruby.</p>
 
-<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre><pre class="lineno">6</pre><pre class="lineno">7</pre><pre class="lineno">8</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">PrintReport</span> <span class="p">(</span> <span class="n">reportObjects</span> <span class="p">)</span>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">PrintReport</span> <span class="p">(</span> <span class="n">reportObjects</span> <span class="p">)</span>
  <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
  <span class="k">while</span> <span class="p">(</span> <span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">reportObjects</span><span class="p">.</span><span class="nf">size</span> <span class="p">)</span> <span class="k">do</span>
  <span class="no">Kernel</span><span class="p">.</span><span class="nf">printf</span> <span class="p">(</span> <span class="s2">"Object #"</span> <span class="o">+</span> <span class="n">i</span><span class="p">.</span><span class="nf">to_s</span> <span class="o">+</span> <span class="s2">" "</span><span class="p">);</span>
- <span class="no">Kernel</span><span class="p">.</span><span class="nf">printf</span> <span class="p">(</span> <span class="n">reportObjects</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">.</span><span class="nf">data</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span>
+ <span class="no">Kernel</span><span class="p">.</span><span class="nf">printf</span> <span class="p">(</span> <span class="n">reportObjects</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">data</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">);</span>
  <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
  <span class="k">end</span>
 <span class="k">end</span>
@@ -70,7 +77,11 @@
 
 <p>Even though the above code is perfectly valid Ruby syntax, I think any Ruby developer would be sent through the roof if they came across this code while working. While bringing over what we know to a new language or environment is important, it's also important to adapt that to the style or common idioms of that language. For instance, in Ruby, it's normally frowned upon to use loops when you can leverage the Enumerable library to do that work for you. We could write that previous code in a more Ruby style like this:</p>
 
-<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre><pre class="lineno">2</pre><pre class="lineno">3</pre><pre class="lineno">4</pre><pre class="lineno">5</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">print_report</span><span class="p">(</span><span class="n">report_objs</span><span class="p">)</span>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="k">def</span> <span class="nf">print_report</span><span class="p">(</span><span class="n">report_objs</span><span class="p">)</span>
   <span class="n">report_objs</span><span class="p">.</span><span class="nf">each_with_index</span> <span class="k">do</span> <span class="o">|</span><span class="n">object</span><span class="p">,</span> <span class="n">index</span><span class="o">|</span>
     <span class="nb">puts</span> <span class="s2">"Object #</span><span class="si">#{</span><span class="n">index</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">object</span><span class="p">.</span><span class="nf">data</span><span class="si">}</span><span class="s2">"</span>
   <span class="k">end</span>
