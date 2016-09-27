@@ -104,12 +104,18 @@ textarea {
 h1, h2, h3, h4 { font-family: "Montserrat", "Futura", Helvetica, Arial, sans-serif; }
 
 a, a:visited {
-  color: white;
+  color: #AAAAAA;
   text-decoration:none;
-  font-size: 1.2em;
+  font-size: 1.0em;
 }
 
-nav a {
+a[href*='lunarcollective']:hover {
+  color: #5E5A67 !important;
+  border-color: #5E5A67 !important;
+}
+
+nav a, nav a:visited {
+    color: #333333;
     font-family: "Montserrat", "Futura", Helvetica, Arial, sans-serif;
     font-weight: 300;
 }
@@ -121,30 +127,33 @@ nav a:hover {
 /* header */
 header {
   color: #CACACA;
-  background-color: #196375;
-/*    background-color: #da7c6f; */
+/*  background-color: #196375; teal
+  background-color: #da7c6f;   peach */
   top:0;
   width:100%;
   /* margin-bottom:20px; */
 }
 
 header h1 {
-    color: white;
+    color: #333333;
     font-weight: bolder;
     font-size: 3em;
     margin: .3em 0 0 1em;
     text-align: right;
 }
 
-header h1 a {
+header h1 a, header h1 a:visited {
+  color: #333333;
   font-size:3.4rem;
 }
 
-header h1 strong { color:white; font-weight:900; }
+header h1 strong { 
+  color: #333333; font-weight:900; 
+}
 
 header h2 {
     font-family: "Sofia", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: white;
+    color: #555555;
     font-style: italic;
     text-align: right;
     font-size: 1.3em;
@@ -161,9 +170,9 @@ nav ul {
 nav ul li {
   font-size: 1.2em;
   margin: 0 auto;
-    text-align: left;
+  text-align: left;
   line-height: 40px;
-    display: table-cell;
+  display: table-cell;
 }
 
 nav ul li:not(:last-child):after {
@@ -247,7 +256,7 @@ ul.games-list li {
 /*== About ==*/
 .full-width {
   position:relative;
-  background: rgba(0,0,0,0.44) url('../img/me.jpg');
+  background: rgba(0,0,0,0.44) url('../img/marfa.jpg');
   background-size: cover;
   height: 100%;
 }
@@ -266,6 +275,16 @@ ul.games-list li {
   color:white;
   font-size: 1.4em;
   font-family: "Open Sans", "Times New Roman", Times New Roman, serif;
+}
+
+.full-width p a, .full-width p a:visited {
+  color: white;
+  font-weight: 700;
+  font-size: 1em;
+}
+
+.full-width p a:hover {
+  border-bottom: 1px solid white;
 }
 
 .centered {
